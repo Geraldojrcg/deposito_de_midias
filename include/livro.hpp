@@ -11,6 +11,7 @@ class Livro: public Midia{
         string ISBN;
     public:
         Livro(string titl, string aut, string ed, string s, int ano);
+        Livro() = default;
         string getTitulo();
         void setTitulo(string t);
         string getAutor();
@@ -29,6 +30,8 @@ class Livro: public Midia{
             string titl, aut, ed, isbn;
             int ano;
             d.setTipo("livro");
+            cout<< "----------Insira as informações-----------\n";
+            getline(is, titl);
             cout<<"Titulo: "; getline(is, titl); d.setTitulo(titl);
             cout<<"Autor: "; getline(is, aut); d.setAutor(aut);
             cout<<"Editora: "; getline(is, ed); d.setEditora(ed);

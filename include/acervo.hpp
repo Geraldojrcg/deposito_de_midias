@@ -15,6 +15,11 @@ class Acervo: public Midia{
         void insert_midia(Midia *m);
         void info_midia();
         void estatistica();
+        bool equal_midia(Midia* m);
+        Midia* search_midia(std::string s);
+        void remove_midia(Midia* m);
+        void edit_midia(Midia* m);
+        
 };
 #include "acervo.inl"
 #endif

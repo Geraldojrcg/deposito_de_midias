@@ -11,6 +11,7 @@ class Dvd: public Midia{
         string classificacao;
     public:
         Dvd(string titl, string dir, string dur, string c, int ano);
+        Dvd() = default;
         string getTitulo();
         void setTitulo(string t);
         string getDiretor();
@@ -29,6 +30,8 @@ class Dvd: public Midia{
             string tp, titl, dir, dur, clas;
             int ano;
             d.setTipo("dvd");
+            cout<< "----------Insira as informações-----------\n";
+            getline(is, titl);
             cout<<"Titulo: "; getline(is, titl); d.setTitulo(titl);
             cout<<"Diretor: "; getline(is, dir); d.setDiretor(dir);
             cout<<"Duração: "; getline(is, dur); d.setDuracao(dur);

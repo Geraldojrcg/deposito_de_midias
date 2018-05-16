@@ -19,36 +19,32 @@ Acervo::Acervo(void){
     insert_midia(m5);
     insert_midia(m6);
 }
-
-void Acervo::insert_midia(Midia *m){
-    bool diff = true;
-    if(!ml.empty()){
-        Livro *ln;
-        Cd* cn;
-        Dvd* dn;
-        if(m->getTipo() == "livro"){
-            ln = (Livro*)(m);
-        }else if(m->getTipo() == "cd"){
-            cn = (Cd*)(m);
+bool Acervo::equal_midia(Midia* m){
+    for(Midia* aux : ml){
+        if(aux->getTipo() == "livro" && m->getTipo() == "livro"){
+            Livro *l = (Livro*)(aux);
+            Livro *ln = (Livro*)(m);
+            if(*l == *ln)
+                return true;
+        }else if(aux->getTipo() == "cd" && m->getTipo() == "cd"){
+            Cd* c = (Cd*)(aux);
+            Cd* cn = (Cd*)(m);
+            if(*c == *cn)
+                return true;
         }else{
-            dn = (Dvd*)(m);
+            Dvd* d = (Dvd*)(aux);
+            Dvd* dn = (Dvd*)(m);
+            if(*d == *dn)
+                return true;
         }
-        for(Midia* m : ml){
-            if(m->getTipo() == "livro"){
-                Livro *l = (Livro*)(m);
-                if(*l == *ln)
-                    diff = false;
-            }else if(m->getTipo() == "cd"){
-                Cd* c = (Cd*)(m);
-                if(*c == *cn)
-                    diff = false;
-            }else{
-                Dvd* d = (Dvd*)(m);
-                if(*d == *dn)
-                    diff = false;
-            }
-        }
-        if(diff){
+    }
+    return false;
+}
+void Acervo::insert_midia(Midia *m){
+    bool equal = false;
+    if(!ml.empty()){
+        equal = equal_midia(m);
+        if(!equal){
             if(m->getTipo() == "livro"){
                 contLivro++;
             }else if(m->getTipo() == "cd"){
@@ -61,6 +57,13 @@ void Acervo::insert_midia(Midia *m){
             std::cout << "Erro: mídia existente no acervo!\n";
         }
     }else{
+        if(m->getTipo() == "livro"){
+                contLivro++;
+        }else if(m->getTipo() == "cd"){
+                contCd++;
+        }else{
+                contDvd++;
+        }
         ml.push_back(m);
     }
 }
@@ -83,4 +86,77 @@ void Acervo::estatistica(){
     std::cout << "Livros: " << contLivro << "\n";
     std::cout << "Cds: " << contCd << "\n";
     std::cout << "Dvds: " << contDvd << "\n";
+}
+Midia* Acervo::search_midia(std::string s){
+    bool found = false;
+    if(s != ""){
+        for(Midia* aux : ml){
+            if(aux->getTipo() == "livro"){
+                Livro *l = (Livro*)(aux);
+                if(l->getTitulo() == s){
+                    Midia* m = l;
+                    found = true;
+                    return m;
+                }
+            }else if(aux->getTipo() == "cd"){
+                Cd* c = (Cd*)(aux);
+                    if(c->getNome() == s){
+                    Midia* m = c;
+                    found = true;
+                    return m;
+                }
+            }else{
+                Dvd* d = (Dvd*)(aux);
+                    if(d->getTitulo() == s){
+                    Midia* m = d;
+                    found = true;
+                    return m;
+                }
+            }
+        }
+    }
+    if(!found){
+        std::cout <<"Midia não encontrada!\n";
+        return nullptr;
+    }
+     return nullptr;
+}
+void Acervo::remove_midia(Midia* m){
+        if(m->getTipo() == "livro"){
+            contLivro--;
+        }else if(m->getTipo() == "cd"){
+            contCd--;
+        }else{
+            contDvd--;
+        }
+        ml.remove(m);
+}
+void Acervo::edit_midia(Midia* m){
+    if(m != nullptr){
+        if(m->getTipo() == "livro"){
+            Livro *aux = (Livro*)(m);
+            std::cout << *aux << std::endl;
+            Livro* l = new Livro();
+            std::cin>> *l; 
+            Midia* temp = l;
+            remove_midia(m);
+            insert_midia(temp);
+        }else if(m->getTipo() == "cd"){
+            Cd* c = (Cd*)(m);
+            std::cout << *c << std::endl;
+            Cd* aux = new Cd();
+            std::cin>> *aux;
+            Midia* temp = aux;
+            remove_midia(m);
+            insert_midia(temp);
+        }else{
+            Dvd* d = (Dvd*)(m);
+            std::cout << *d << std::endl;
+            Dvd* aux = new Dvd();
+            std::cin>> *aux; 
+            Midia* temp = aux;
+            remove_midia(m);
+            insert_midia(temp);
+        }
+    }
 }

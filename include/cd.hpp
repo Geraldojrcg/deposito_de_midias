@@ -11,6 +11,7 @@ class Cd: public Midia{
         int Qtd_faixas; 
     public:
         Cd(string nm, string comp, string grv, int qtdf, int ano);
+        Cd() = default;
         string getNome();
         void setNome(string n);
         string getCompositor();
@@ -29,6 +30,8 @@ class Cd: public Midia{
             string nm, comp, grv;
             int ano, qtdf;
             d.setTipo("cd");
+            cout<< "----------Insira as informações-----------\n";
+            getline(is, nm);
             cout<<"Nome: "; getline(is, nm); d.setNome(nm);
             cout<<"Compositor: "; getline(is, comp); d.setCompositor(comp);
             cout<<"Gravadora: "; getline(is, grv); d.setGravadora(grv);
