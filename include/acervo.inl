@@ -122,6 +122,7 @@ Midia* Acervo::search_midia(std::string s){
      return nullptr;
 }
 void Acervo::remove_midia(Midia* m){
+    if(m != nullptr){
         if(m->getTipo() == "livro"){
             contLivro--;
         }else if(m->getTipo() == "cd"){
@@ -130,6 +131,7 @@ void Acervo::remove_midia(Midia* m){
             contDvd--;
         }
         ml.remove(m);
+    }
 }
 void Acervo::edit_midia(Midia* m){
     if(m != nullptr){

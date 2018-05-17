@@ -99,7 +99,9 @@ int main(){
                     getline(cin, t);
                     Midia* m = ac->search_midia(t);
                     ac->remove_midia(m);
-                    cout << "Livro removido!\n";
+                    if(m != nullptr){
+                        cout << "Livro removido!\n";
+                    }
                 }
                 if(op3 == 2){
                     string t;
@@ -108,7 +110,9 @@ int main(){
                     getline(cin, t);
                     Midia* m = ac->search_midia(t);
                     ac->remove_midia(m);
-                    cout << "Cd removido!\n";
+                    if(m != nullptr){
+                        cout << "Cd removido!\n";
+                    }
                 }
                 if(op3 == 3){
                     string t;
@@ -117,7 +121,9 @@ int main(){
                     getline(cin, t);
                     Midia* m = ac->search_midia(t);
                     ac->remove_midia(m);
-                    cout << "Dvd removido!\n";
+                    if(m != nullptr){
+                        cout << "Dvd removido!\n";    
+                    }
                 }
                 break;
             }
